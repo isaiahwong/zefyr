@@ -47,7 +47,7 @@ class NotusDocument {
   /// Creates new NotusDocument from provided JSON `data`.
   NotusDocument.fromJson(List data)
       : _heuristics = NotusHeuristics.fallback,
-        _delta = _migrateDelta(Delta.fromJson(data)) {
+        _delta = _transform(_migrateDelta(Delta.fromJson(data))) {
     _loadDocument(_delta);
   }
 
@@ -230,6 +230,7 @@ class NotusDocument {
     var offset = 0;
     final before = toDelta();
     change = _migrateDelta(change);
+    change = _transform(change);
     for (final op in change.toList()) {
       final attributes =
           op.attributes != null ? NotusStyle.fromJson(op.attributes) : null;
@@ -293,6 +294,26 @@ class NotusDocument {
       }
     }
     return result;
+  }
+
+  static Delta _transform(Delta delta) {
+    Delta res = Delta();
+    List<Operation> ops = delta.toList();
+    for (int i = 0; i < ops.length; i++) {
+      Operation op = ops[i];
+      res.push(op);
+      // Currently embed is equivalent to image and hence `is! String`
+      bool opInsertImage = op.isInsert && op.data is! String;
+      bool nextOpIsLineBreak = i + 1 < ops.length &&
+          ops[i + 1].isInsert &&
+          ops[i + 1].data is String &&
+          (ops[i + 1].data as String) == '\n';
+      if (opInsertImage && (i + 1 == ops.length - 1 || !nextOpIsLineBreak)) {
+        // automatically append '\n' for image
+        res.push(Operation.insert('\n', null));
+      }
+    }
+    return res;
   }
 
   Object _normalizeData(Object data) {
