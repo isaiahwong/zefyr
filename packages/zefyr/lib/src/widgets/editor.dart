@@ -977,6 +977,7 @@ class RawEditorState extends EditorState
     _themeData = (parentTheme != null)
         ? fallbackTheme.merge(parentTheme)
         : fallbackTheme;
+    print(_themeData.heading1);
 
     if (!_didAutoFocus && widget.autofocus) {
       FocusScope.of(context).autofocus(effectiveFocusNode);
@@ -1526,6 +1527,17 @@ class RawEditorState extends EditorState
     PasteTextIntent: _makeOverridable(CallbackAction<PasteTextIntent>(
         onInvoke: (PasteTextIntent intent) => pasteText(intent.cause))),
   };
+
+  @override
+  void didChangeInputControl(
+      TextInputControl? oldControl, TextInputControl? newControl) {
+    // TODO: implement didChangeInputControl
+  }
+
+  @override
+  void performSelector(String selectorName) {
+    // TODO: implement performSelector
+  }
 }
 
 class _Editor extends MultiChildRenderObjectWidget {

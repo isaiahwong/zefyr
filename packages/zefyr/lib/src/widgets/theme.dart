@@ -144,7 +144,7 @@ class ZefyrThemeData {
     );
 
     return ZefyrThemeData(
-      bold: const TextStyle(fontWeight: FontWeight.bold),
+      bold: const TextStyle(fontWeight: FontWeight.w900),
       italic: const TextStyle(fontStyle: FontStyle.italic),
       underline: const TextStyle(decoration: TextDecoration.underline),
       strikethrough: const TextStyle(decoration: TextDecoration.lineThrough),
@@ -154,12 +154,12 @@ class ZefyrThemeData {
         style: inlineCodeStyle,
         heading1: inlineCodeStyle.copyWith(
           fontSize: 32,
-          fontWeight: FontWeight.w300,
+          fontWeight: FontWeight.w900,
         ),
         heading2: inlineCodeStyle.copyWith(fontSize: 22),
         heading3: inlineCodeStyle.copyWith(
           fontSize: 18,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w900,
         ),
       ),
       link: TextStyle(
@@ -172,11 +172,11 @@ class ZefyrThemeData {
         // lineSpacing is not relevant for paragraphs since they consist of one line
       ),
       heading1: TextBlockTheme(
-        style: defaultStyle.style.copyWith(
+        style: TextStyle(
           fontSize: 34.0,
           color: defaultStyle.style.color?.withOpacity(0.70),
           height: 1.15,
-          fontWeight: FontWeight.w300,
+          fontWeight: FontWeight.w900,
         ),
         spacing: const VerticalSpacing(top: 16.0, bottom: 0.0),
       ),
@@ -185,7 +185,7 @@ class ZefyrThemeData {
           fontSize: 24.0,
           color: defaultStyle.style.color?.withOpacity(0.70),
           height: 1.15,
-          fontWeight: FontWeight.normal,
+          fontWeight: FontWeight.w900,
         ),
         spacing: const VerticalSpacing(bottom: 0.0, top: 8.0),
       ),
@@ -194,7 +194,7 @@ class ZefyrThemeData {
           fontSize: 20.0,
           color: defaultStyle.style.color?.withOpacity(0.70),
           height: 1.25,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w900,
         ),
         spacing: const VerticalSpacing(bottom: 0.0, top: 8.0),
       ),

@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
       final result = await rootBundle.loadString('assets/welcome.note');
       final doc = NotusDocument.fromJson(jsonDecode(result));
       setState(() {
-        _controller = ZefyrController(doc);
+        _controller = ZefyrController();
       });
     } catch (error) {
       final doc = NotusDocument()..insert(0, 'Empty asset');
@@ -170,6 +170,7 @@ class _HomePageState extends State<HomePage> {
             child: ZefyrEditor(
               controller: _controller,
               focusNode: _focusNode,
+              
               autofocus: true,
               // readOnly: true,
               // padding: EdgeInsets.only(left: 16, right: 16),
